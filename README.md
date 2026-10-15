@@ -79,10 +79,19 @@ On a fresh database, visiting `http://localhost:8000` will open the Flarum insta
 For the local database use:
 
 ```
-Database host:     db
-Database name:     flarum
-Database username: flarum
-Database password: <value from .env>
+Forum title:         Hermertia Commons
+Database driver:     MariaDB
+Database:            flarum
+Database host:       db
+Database name:       flarum
+Database username:   flarum
+Database password:   <value from .env>
+Table prefix:        leave blank
+
+Admin account:
+Admin Username:   <any>
+Admin Email:      <any, but should be real>
+Admin Password:   <any strong>
 ```
 
 Complete the remaining forum and administrator configuration through the installer.
@@ -135,6 +144,26 @@ Run Composer:
 ```
 docker compose exec web composer install
 ```
+
+## WSL temporary ownership
+
+Some struggle to access the folder from WSL without some tricks. 
+
+1. Give ownership to the folder
+
+```
+docker compose exec --user root web \
+  chown -R www-data:www-data /var/www/flarum
+```
+then
+```
+docker compose exec --user root web \
+  chmod -R 775 /var/www/flarum
+  ```
+2. 
+
+
+
 
 ## Project Structure
 
